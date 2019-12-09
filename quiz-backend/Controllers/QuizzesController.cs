@@ -27,9 +27,14 @@ namespace quiz_backend
         public IEnumerable<Quiz> GetQuiz()
         {
             var userId = HttpContext.User.Claims.First().Value;
-            var quizzes = _context.Quiz.ToList();
 
             return _context.Quiz.Where(q => q.OwnerId == userId);
+        }
+
+        [HttpGet("all")]
+        public IEnumerable<Quiz> GetAllQuizzes()
+        {
+            return _context.Quiz;
         }
 
         // GET: api/Quizzes/5
